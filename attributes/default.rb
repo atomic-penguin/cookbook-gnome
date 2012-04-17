@@ -17,9 +17,10 @@
 # limitations under the License.
 #
 
-case node[:platform] when "redhat","centos"
-  if node[:platform_version].to_i == 5
-    set[:gnome][:packages] = [
+case node['platform']
+when "redhat","centos","scientific","amazon"
+  if node['platform_version'].to_i == 5
+    set['gnome']['packages'] = [
       "control-center",
       "gnome-applets",
       "gnome-panel",
@@ -30,4 +31,8 @@ case node[:platform] when "redhat","centos"
       "yelp"
     ]
   end
+else
+  node['gnome']['packages'] = [
+    "gnome-desktop-environment"
+  ]
 end
