@@ -18,21 +18,17 @@
 #
 
 case node['platform']
-when "redhat","centos","scientific","amazon"
-  if node['platform_version'].to_i == 5
-    set['gnome']['packages'] = [
-      "control-center",
-      "gnome-applets",
-      "gnome-panel",
-      "gnome-session",
-      "gnome-terminal",
-      "metacity",
-      "nautilus",
-      "yelp"
-    ]
-  end
+when "redhat","centos","scientific","amazon","oracle"
+  default['gnome']['packages'] = %w{
+      control-center
+      gnome-applets
+      gnome-panel
+      gnome-session
+      gnome-terminal
+      metacity
+      nautilus
+      yelp
+    }
 else
-  node['gnome']['packages'] = [
-    "gnome-desktop-environment"
-  ]
+  default['gnome']['packages'] = %w{ gnome-desktop-environment }
 end
